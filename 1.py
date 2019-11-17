@@ -1,10 +1,9 @@
 #!/usr/bin/env python
-import os
-import sys
+import urllib.request
+
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gettingstarted.settings")
-
-    from django.core.management import execute_from_command_line
-
-    execute_from_command_line(sys.argv)
+    contents = urllib.request.urlopen("https://ru.wowhead.com/world-quests/bfa/eu").read().decode('utf-8')
+    id = "56007"
+    if id in contents:
+        urllib.request.urlopen("https://api.telegram.org/bot343228570:AAHWvNfSyL-O5QgnkQXWK7DDTWL70_XHTcw/sendMessage?chat_id=129934507&text=https://ru.wowhead.com/quest=%s" % id)
