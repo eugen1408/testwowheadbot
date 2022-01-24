@@ -3,6 +3,7 @@ import urllib.request
 import time
 import mysql.connector
 import urllib.request
+from datetime import datetime
 
 
 if __name__ == "__main__":
@@ -10,6 +11,8 @@ if __name__ == "__main__":
 
     while(not time.sleep(5)):
         try:
+            if datetime.utcnow().strftime("%H:%M") == "23:59":
+                break
             mydb = mysql.connector.connect(
             host="mbc.filmus.online",
             user="MediseenBD",
