@@ -19,9 +19,10 @@ while True:
         result = cursor.fetchall()
 
         for x in result:
-            values = urllib.parse.urlencode(' '.join(str(e) for e in x))
+            values = ' '.join(str(e) for e in x)
             if values not in temp_list:
                 temp_list.append(values)
-                urllib.request.urlopen("https://api.telegram.org/bot343228570:AAHWvNfSyL-O5QgnkQXWK7DDTWL70_XHTcw/sendMessage?chat_id=-660618667&text=%s" % values)
-    except:
-        pass
+                encoded = urllib.parse.quote(values)
+                urllib.request.urlopen("https://api.telegram.org/bot343228570:AAHWvNfSyL-O5QgnkQXWK7DDTWL70_XHTcw/sendMessage?chat_id=-660618667&text=%s" % encoded)
+    except Exception as err:
+        print(err)
